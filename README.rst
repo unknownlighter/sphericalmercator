@@ -1,7 +1,7 @@
 Description
 ===========
 
-Tool for calculate tile bounding box (in geodesic coordinates) by specified XYZ (x-coordinate, y-coordinate, zoom) in cartesian coordinates.
+Tool for calculate tile bounding box (in geodesic coordinates) by specified XYZ (x - column, y - row, z - zoom) of tile.
 
 
 Installation
