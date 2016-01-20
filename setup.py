@@ -3,6 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name='sphericalmercator',
     version='0.0.1',
-    packages=find_packages(),
-    long_description=open('README.md').read(),
+    py_modules = ['sphericalmercator',],
+    long_description=open('README.rst').read(),
+    url='https://bitbucket.org/lighter/spherical-mercator/',
 )
