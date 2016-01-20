@@ -1,5 +1,8 @@
 import math
 
+class WrongZoomException(Exception):
+    pass
+
 class SphericalMercator(object):
     """
     Python class defining Spherical Mercator Projection.
@@ -30,7 +33,12 @@ class SphericalMercator(object):
         a = min(a,c)
         return a
 
+    def check_zoom(self, zoom):
+        if zoom < 0 or zoom >= self.levels:
+            raise WrongZoomException('zoom must be between %s and %s' % (0, self.levels - 1))
+
     def ll_to_px(self,px,zoom):
+        self.check_zoom(zoom)
         d = self.zc[zoom]
         e = round(d[0] + px[0] * self.Bc[zoom])
         f = self.minmax(math.sin(self.DEG_TO_RAD * px[1]),-0.9999,0.9999)
@@ -40,6 +48,7 @@ class SphericalMercator(object):
     def px_to_ll(self,px,zoom):
         """ Convert pixel postion to LatLong (EPSG:4326) """
         # TODO - more graceful handling of indexing error
+        self.check_zoom(zoom)
         e = self.zc[zoom]
         f = (px[0] - e[0])/self.Bc[zoom]
         g = (px[1] - e[1])/-self.Cc[zoom]
