@@ -6,3 +6,5 @@ syntax: glob
 *.egg-info
 .idea
 dist/*
+build/*
+
