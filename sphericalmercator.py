@@ -40,13 +40,13 @@ class SphericalMercator(object):
         if zoom < 0 or zoom >= self.levels:
             raise WrongZoomException('zoom must be between %s and %s' % (0, self.levels - 1))
 
-    def ll_to_px(self, px, zoom):
+    def ll_to_px(self, ll, zoom):
         self.check_zoom(zoom)
         d = self.zc[zoom]
-        e = round(d[0] + px[0] * self.Bc[zoom])
-        f = self.minmax(math.sin(self.DEG_TO_RAD * px[1]), -0.9999, 0.9999)
+        e = round(d[0] + ll[0] * self.Bc[zoom])
+        f = self.minmax(math.sin(self.DEG_TO_RAD * ll[1]), -0.9999, 0.9999)
         g = round(d[1] + 0.5 * math.log((1 + f) / (1 - f)) * -self.Cc[zoom])
-        return (e, g)
+        return e, g
 
     def px_to_ll(self, px, zoom):
         """ Convert pixel postion to LatLong (EPSG:4326) """
