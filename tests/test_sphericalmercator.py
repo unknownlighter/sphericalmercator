@@ -13,3 +13,13 @@ def test_xyz_to_envelope__returns_expected(x, y, z, expected):
     merc = SphericalMercator()
 
     assert merc.xyz_to_envelope(x, y, z) == expected
+
+
+@pytest.mark.parametrize("minx,miny,maxx,maxy,zoom,expected", [
+    (-122.4591, 37.7880, -122.4536, 37.7924, 16, [(10475, 25327), (10475, 25328), (10476, 25327), (10476, 25328)]),
+    (179.99, 35, -179.99, 35, 16, [(0, 25958), (1, 25958), (65534, 25958), (65535, 25958)]),
+])
+def test_bbox_to_tiles__returns_expected(minx, miny, maxx, maxy, zoom, expected):
+    merc = SphericalMercator()
+
+    assert list(merc.bbox_to_tiles(minx, miny, maxx, maxy, zoom)) == expected

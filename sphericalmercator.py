@@ -30,7 +30,7 @@ class SphericalMercator(object):
             self.Ac.append(size)
             size *= 2.0
 
-    @classmethod
+    @staticmethod
     def minmax(a, b, c):
         a = max(a, b)
         a = min(a, c)
@@ -68,3 +68,34 @@ class SphericalMercator(object):
         minx, miny = self.px_to_ll(ll, zoom)
         maxx, maxy = self.px_to_ll(ur, zoom)
         return minx, miny, maxx, maxy
+
+    def bbox_to_tiles(self, minx, miny, maxx, maxy, zoom):
+        """Get the tiles for bbox"""
+        self.check_zoom(zoom)
+
+        minx = max(-180.0, minx)
+        miny = max(-85.051129, miny)
+        maxx = min(180.0, maxx)
+        maxy = min(85.051129, maxy)
+
+        if minx > maxx:
+            bboxes = [
+                (-180.0, miny, maxx, maxy),
+                (minx, miny, 180.0, maxy)
+            ]
+        else:
+            bboxes = [(minx, miny, maxx, maxy)]
+
+        for minx, miny, maxx, maxy in bboxes:
+
+            ll = self.ll_to_px((minx, miny), zoom)
+            ur = self.ll_to_px((maxx, maxy), zoom)
+
+            tile_x_min = int(max(ll[0] / self.size, 0))
+            tile_x_max = int(min(ur[0] / self.size + 1, 2 ** zoom))
+            tile_y_min = int(max(ur[1] / self.size, 0))
+            tile_y_max = int(min(ll[1] / self.size + 1, 2 ** zoom))
+
+            for x in range(tile_x_min, tile_x_max):
+                for y in range(tile_y_min, tile_y_max):
+                    yield x, y
