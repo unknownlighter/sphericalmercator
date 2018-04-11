@@ -2,9 +2,8 @@
     :alt: The PyPI package
     :target: https://pypi.python.org/pypi/sphericalmercator
 
-.. image:: https://img.shields.io/pypi/dw/sphericalmercator.svg
-    :alt: PyPI download statistics
-    :target: https://pypi.python.org/pypi/sphericalmercator
+.. image:: https://travis-ci.org/unknownlighter/sphericalmercator.svg?branch=master
+    :target: https://travis-ci.org/unknownlighter/sphericalmercator
 
 Description
 ===========
