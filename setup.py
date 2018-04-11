@@ -7,4 +7,9 @@ setup(
     description = 'Tool for calculate XYZ-tile bounding box in spherical mercator',
     long_description=open('README.rst').read(),
     url='https://bitbucket.org/lighter/spherical-mercator/',
+    extras_require={
+        'test': [
+            'pytest',
+        ],
+    }
 )

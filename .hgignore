@@ -9,3 +9,5 @@ dist/*
 build/*
 .direnv/*
 .envrc
+.tox
+.pytest_cache
