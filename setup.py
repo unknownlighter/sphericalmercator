@@ -6,7 +6,7 @@ setup(
     py_modules = ['sphericalmercator',],
     description = 'Tool for calculate XYZ-tile bounding box in spherical mercator',
     long_description=open('README.rst').read(),
-    url='https://bitbucket.org/lighter/spherical-mercator/',
+    url='https://github.com/unknownlighter/sphericalmercator',
     classifiers=[
           'Programming Language :: Python :: 2.7',
           'Programming Language :: Python :: 3.5',
